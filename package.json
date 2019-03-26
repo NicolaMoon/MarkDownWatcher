@@ -1,0 +1,19 @@
+{
+  "name": "mdserver",
+  "version": "1.0.0",
+  "description": "a node server for markdown notebook",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "Nicola",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "jstransformer-markdown-it": "^2.1.0",
+    "markdown-it": "^8.4.2",
+    "pug": "^2.0.3",
+    "stylus": "^0.54.5"
+  }
+}

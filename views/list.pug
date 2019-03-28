@@ -1,7 +1,10 @@
-html
+extends ./layout.pug
+
+block head
   head
     title list
-  body
+    link(rel="stylesheet", href=`http://127.0.0.1:3000/css/${css}`)
+block content
     each item in list
-      li 
-        a(href=`../md?file=${item}&css=normal`)= item
+      li
+        a(href=`../md?file=${item}&css=${css}`)= item

@@ -22,6 +22,7 @@ app.set('view engine', 'pug');
 http.createServer(app).listen(PORT);
 console.log('The Server is Running...');
 
+// 自动打开浏览器
 switch (process.platform) {
   //mac系统使用 一下命令打开url在浏览器
   case "darwin":
@@ -39,16 +40,16 @@ switch (process.platform) {
 // api路由请求
 app.get('/', function (req, res) {
   let list = fs.readdirSync('./mds').map(val => path.basename(val, '.md'));
-  res.render('list', { list: list });
+  res.render('list', { list: list, css: req.query.css || 'normal' });
 });
 
 app.get('/md', function (req, res) {
   let result = fs.readFileSync(`./mds/${req.query.file}.md`);
-  res.render('md', { title: req.params.file, result: md.render(result.toString()), css: `css/${req.query.css}` });
+  res.render('md', { title: req.params.file || 'index', result: md.render(result.toString()), css: req.query.css || 'normal' });
 });
 
 app.get('/css/:file', function (req, res) {
-  let css = fs.readFileSync(`./stylus/${req.params.file}.styl`,'utf-8');
+  let css = fs.readFileSync(`./stylus/${req.params.file || 'index'}.styl`,'utf-8');
   stylus.render(css, {filename:"normal.css"}, function(err,css){
     if(err) throw err;
     res.end(css);

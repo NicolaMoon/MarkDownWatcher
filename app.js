@@ -18,6 +18,9 @@ const PORT = 3000;
 app.set('views', './views');
 app.set('view engine', 'pug');
 
+// 静态资源处理中间件，不用再自己手动构造处理方法了
+app.use(express.static('./public'));
+
 // 开启服务器
 http.createServer(app).listen(PORT);
 console.log('The Server is Running...');
@@ -43,11 +46,6 @@ app.get('/', function (req, res) {
   let mdFile = fs.readFileSync(`./mds/${req.query.file || 'index'}.md`);
   res.render('list', { list: list, css: req.query.css || 'normal', mdFile: md.render(mdFile.toString()), fileName: req.query.file || 'index' });
 });
-
-// app.get('/md', function (req, res) {
-//   let result = fs.readFileSync(`./mds/${req.query.file || 'index'}.md`);
-//   res.render('md', { title: req.params.file || 'index', result: md.render(result.toString()), css: req.query.css || 'normal' });
-// });
 
 app.get('/css/:file', function (req, res) {
   let css = fs.readFileSync(`./stylus/${req.params.file || 'index'}.styl`,'utf-8');

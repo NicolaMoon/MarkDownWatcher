@@ -42,9 +42,10 @@ switch (process.platform) {
 
 // api路由请求
 app.get('/', function (req, res) {
-  let list = fs.readdirSync('./mds').map(val => path.basename(val, '.md'));
+  let mdList = fs.readdirSync('./mds').map(val => path.basename(val, '.md'));
+  let cssList = fs.readdirSync('./stylus').map(val => path.basename(val, '.styl'));
   let mdFile = fs.readFileSync(`./mds/${req.query.file || 'index'}.md`);
-  res.render('list', { list: list, css: req.query.css || 'normal', mdFile: md.render(mdFile.toString()), fileName: req.query.file || 'index' });
+  res.render('list', { mdList: mdList, cssList: cssList, css: req.query.css || 'normal', mdFile: md.render(mdFile.toString()), fileName: req.query.file || 'index' });
 });
 
 app.get('/css/:file', function (req, res) {

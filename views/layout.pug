@@ -4,6 +4,26 @@ html
   body
     div.header
       p.title Markdown Watcher
+      .select
+        span.label 切换样式:
+        select(onchange=`handleChangeStyle()`)#selectCss
+          each item in cssList
+            option(value=item, selected=css===item ? true : false)= item
     div.wrapper
       block content
     block script
+    script.
+      function getQuerys() {
+        let url = window.location.href;
+        let querys = {};
+        url.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
+          querys[key] = value;
+        });
+        return querys;
+      }
+      function handleChangeStyle() {
+        let select = document.getElementById('selectCss');
+        let cssValue = select.value;
+        let querys = getQuerys();
+        window.location.href = `../?file=${querys.file || 'index'}&css=${cssValue}`;
+      }

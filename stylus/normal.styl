@@ -9,6 +9,20 @@ a
   text-decoration: none
 html
   font-family: 'Noto Serif SC', serif
+  select
+    display: inline-block
+    position relative
+    margin: 0 8px 10px 0
+    width: 120px
+    height: 32px
+    color: rgba(0,0,0,0.65)
+    font-size: 14px
+    line-height: 1.5
+    background-color: #fff
+    option
+      position: absolute
+      z-index: 10
+      top: 32px
   .header
     position: absolute
     top: 0
@@ -20,6 +34,12 @@ html
       margin: 12px 16px
       font-size: 24px
       color: #eb6f5a
+    .select
+      position: absolute
+      top: 13.5px
+      right: 8px
+      .label
+        margin-right: 8px
   .wrapper
     padding-top: 59px
     display: flex

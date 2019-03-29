@@ -3,12 +3,12 @@ extends ./layout.pug
 block head
   head
     title list
-    link(rel="stylesheet", href=`http://127.0.0.1:3000/css/${css}`)
+    link(rel="stylesheet", href=`../css/${css}`)
 block content
   div.side
     p 文件列表
     nav
-      each item, index in list
+      each item, index in mdList
         li
           a(href=`../?file=${item}&css=${css}`
             class=item===fileName ? 'active sideLink' : 'sideLink'

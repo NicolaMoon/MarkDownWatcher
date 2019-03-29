@@ -6,7 +6,9 @@ block head
     link(rel="stylesheet", href=`../css/${css}`)
 block content
   .side
-    p 文件列表
+    .btn= '新建'
+    div(class='btn editBtn')= '编辑'
+    p.title 文件列表
     nav
       each item, index in mdList
         li

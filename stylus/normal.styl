@@ -29,7 +29,7 @@ html
     left: 0
     z-index: 9
     width: 100%
-    border-bottom: 1px solid #f0f0f0
+    background: linear-gradient(to right, #151b26 15%, #5c3196 45%, #ff5263 100%)
     .title
       margin: 12px 16px
       font-size: 24px
@@ -40,12 +40,14 @@ html
       right: 8px
       .label
         margin-right: 8px
+        color: #fff
   .wrapper
     padding-top: 59px
     display: flex
     flex-direction: row
     height: 100vh
     overflow hidden
+    background-color: #f6f8f9
     .side
       order: 1
       flex: 1
@@ -54,6 +56,20 @@ html
       padding-bottom: 0.5em
       overflow-y: scroll
       text-align: center
+      background-color: #151b26
+      .title
+        padding-bottom: 12px
+        color: #fff
+        border-bottom: 1px solid #222b37
+      .btn
+        margin-bottom: 8px
+        padding: 6px 0
+        border-radius: 8px
+        background: linear-gradient(to top right, #ff5263 0%, #ff7381 35%, #fcbd01 100%)
+        color: #fff
+        cursor pointer
+      .editBtn
+        background: linear-gradient(to right, #796eff 0%, #ff5263 100%)
       nav
         margin-bottom: 2rem
         letter-spacing: 1px
@@ -61,7 +77,7 @@ html
           display: block
           padding: 0.5em
           border-top: 0
-          color: #929aab
+          color: #d5dce0
           &:hover
             cursor pointer
         .active
@@ -69,21 +85,27 @@ html
     .description
       order: 3
       flex: 2
-      border: 1px solid #f0f0f0
+      margin: 15px 15px 10px 7.5px
+      background-color: #f6f8f9
       .info
+        background-color: #fff
+        box-shadow: 0 1px 3px 0 rgba(21,27,38,.15);
         .info-title
           padding: 12px 0 12px 24px
-          border-bottom: 1px solid #f0f0f0
+          border-bottom: 1px solid #e3e5ea
         .info-content
-          padding-left 24px
+          padding 16px
           font-size 14px
           color #707070
     .content
       order: 2
       flex: 7
+      margin: 15px 7.5px 10px 15px
       padding: 2em
       padding-bottom: 0.5em
       overflow: scroll
+      background-color: #fff
+      box-shadow: 0 1px 3px 0 rgba(21,27,38,.15);
       p
         text-indent: 20px
       pre

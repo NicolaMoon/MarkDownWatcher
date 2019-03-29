@@ -9,6 +9,8 @@ const md = require('markdown-it')();
 const {exec} = require("child_process");
 // 引入stylus
 const stylus = require('stylus');
+// 引入moment时间格式化
+const moment = require('moment');
 
 // 全局变量
 const HOST = 'http://127.0.0.1:';
@@ -45,7 +47,17 @@ app.get('/', function (req, res) {
   let mdList = fs.readdirSync('./mds').map(val => path.basename(val, '.md'));
   let cssList = fs.readdirSync('./stylus').map(val => path.basename(val, '.styl'));
   let mdFile = fs.readFileSync(`./mds/${req.query.file || 'index'}.md`);
-  res.render('list', { mdList: mdList, cssList: cssList, css: req.query.css || 'normal', mdFile: md.render(mdFile.toString()), fileName: req.query.file || 'index' });
+  let fileInfo = null;
+  let stats = fs.statSync(`./mds/${req.query.file || 'index'}.md`);
+  const { mtime, birthtime } = stats;
+  fileInfo={ mtime: moment(mtime).format('YYYY-MM-DD HH:mm:ss'), birthtime: moment(birthtime).format('YYYY-MM-DD HH:mm:ss') };
+  res.render('list', {
+    mdList,
+    cssList: cssList, css: req.query.css || 'normal',
+    mdFile: md.render(mdFile.toString()),
+    fileName: req.query.file || 'index',
+    fileInfo,
+  });
 });
 
 app.get('/css/:file', function (req, res) {

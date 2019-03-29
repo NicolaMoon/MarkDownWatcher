@@ -5,7 +5,7 @@ block head
     title list
     link(rel="stylesheet", href=`../css/${css}`)
 block content
-  div.side
+  .side
     p 文件列表
     nav
       each item, index in mdList
@@ -13,6 +13,8 @@ block content
           a(href=`../?file=${item}&css=${css}`
             class=item===fileName ? 'active sideLink' : 'sideLink'
           )= item
-  div.content
+  .content
     div.
       !{mdFile}
+  .description
+    .info 详细信息

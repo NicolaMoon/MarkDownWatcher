@@ -5,6 +5,13 @@ block head
     title list
     link(rel="stylesheet", href=`http://127.0.0.1:3000/css/${css}`)
 block content
-    each item in list
-      li
-        a(href=`../md?file=${item}&css=${css}`)= item
+  div.side
+    nav
+      each item, index in list
+        li
+          a(href=`../?file=${item}&css=${css}`
+            class=item===fileName ? 'active sideLink' : 'sideLink'
+          )= item
+  div.content
+    div.
+      !{mdFile}

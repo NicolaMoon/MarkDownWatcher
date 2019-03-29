@@ -1,24 +1,66 @@
+*
+  box-sizing: border-box
 li
   list-style-type: none
 a
   text-decoration: none
+body
+  margin: 0
+  padding: 0
 html
-  font-family: 'Noto Serif SC', serif;
-
+  margin: 0
+  padding: 0
+  font-family: 'Noto Serif SC', serif
   .header
     position: absolute
     top: 0
     left: 0
     z-index: 9
+    margin: 0
+    padding: 0
     width: 100%
     border-bottom: 1px solid #f0f0f0
-
     .title
       margin: 12px 16px
       font-size: 32px
       color: #eb6f5a
-  
-  .content
-    margin-top: 75px
-  h1
-    color: #dd6b4d
+  .wrapper
+    margin: 0
+    padding: 0
+    padding-top: 70px
+    display: flex
+    flex-direction: row
+    height: 100vh
+    overflow hidden
+    .side
+      order: 2
+      flex: 1
+      margin: 0
+      padding: 2em
+      padding-bottom: 0.5em
+      overflow-y: scroll
+      text-align: center
+      background: #ff6347
+      nav
+        margin-bottom: 2rem
+        letter-spacing: 1px
+        &:first-child
+          border-top: 1px solid #ff4726
+        .sideLink
+          display: block
+          padding: 1em
+          border: 1px solid #ff4726
+          border-top: 0
+          color: #fff
+          &:hover
+            cursor pointer
+            outline: 0
+            background: #ff5536
+        .active
+          background: #ff5536
+    .content
+      order: 1
+      flex: 2
+      padding-left: 2em
+      padding-bottom: 0.5em
+      overflow: scroll

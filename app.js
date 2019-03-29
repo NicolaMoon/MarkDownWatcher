@@ -40,13 +40,14 @@ switch (process.platform) {
 // api路由请求
 app.get('/', function (req, res) {
   let list = fs.readdirSync('./mds').map(val => path.basename(val, '.md'));
-  res.render('list', { list: list, css: req.query.css || 'normal' });
+  let mdFile = fs.readFileSync(`./mds/${req.query.file || 'index'}.md`);
+  res.render('list', { list: list, css: req.query.css || 'normal', mdFile: md.render(mdFile.toString()), fileName: req.query.file || 'index' });
 });
 
-app.get('/md', function (req, res) {
-  let result = fs.readFileSync(`./mds/${req.query.file}.md`);
-  res.render('md', { title: req.params.file || 'index', result: md.render(result.toString()), css: req.query.css || 'normal' });
-});
+// app.get('/md', function (req, res) {
+//   let result = fs.readFileSync(`./mds/${req.query.file || 'index'}.md`);
+//   res.render('md', { title: req.params.file || 'index', result: md.render(result.toString()), css: req.query.css || 'normal' });
+// });
 
 app.get('/css/:file', function (req, res) {
   let css = fs.readFileSync(`./stylus/${req.params.file || 'index'}.styl`,'utf-8');

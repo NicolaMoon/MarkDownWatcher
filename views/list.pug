@@ -18,6 +18,9 @@ block content
   .content
     div.
       !{mdFile}
+    .tooltip
+      p 评论
+      .arrow
   .description
     .info
       .info-title 详细信息
@@ -26,3 +29,7 @@ block content
         p= fileInfo.birthtime
         p 最后一次修改时间
         p= fileInfo.mtime
+    .comment
+      .comment-title 评论
+      .comment-content
+        textarea(placeholder='请输入…')

@@ -88,16 +88,47 @@ html
       margin: 15px 15px 10px 7.5px
       background-color: #f6f8f9
       .info
+        margin-bottom: 15px
         background-color: #fff
         box-shadow: 0 1px 3px 0 rgba(21,27,38,.15);
         .info-title
-          padding: 12px 0 12px 24px
+          padding: 12px 8px 12px 24px
           border-bottom: 1px solid #e3e5ea
         .info-content
           padding 16px
           font-size 14px
           color #707070
+      .comment
+        margin-bottom: 15px
+        background-color: #fff
+        box-shadow: 0 1px 3px 0 rgba(21,27,38,.15);
+        .comment-title
+          position relative
+          max-width: 220px
+          padding: 6px 8px 6px 24px
+          white-space: nowrap
+          overflow hidden
+          text-overflow: ellipsis
+          color: #929aab
+          &:before
+            content: ''
+            position: absolute
+            top: 0
+            left: 4px
+            width: 3px
+            height: 100%
+            background: linear-gradient(to bottom, #796eff 0%, #ff5263 100%)
+        .comment-content
+          padding: 8px
+          textarea
+            width: 100%
+            border: none
+            font-size: 16px
+            letter-spacing: 1px
+            &:focus
+              outline: none
     .content
+      position relative
       order: 2
       flex: 7
       margin: 15px 7.5px 10px 15px
@@ -175,3 +206,32 @@ html
             transition: background .3s ease
       s
         color: #e16262
+      .tooltip
+        display: none
+        position: absolute
+        z-index: 11
+        padding: 6px 12px
+        width: 56px
+        height: 35px
+        color: #fff
+        background: linear-gradient(to bottom, #796eff 0%, #ff5263 100%)
+        border-radius: 4px
+        cursor pointer
+        p
+          text-indent: 0
+          margin: 0
+        .arrow
+          position: absolute
+          left: 50%
+          display: block
+          width: 8.48528137px
+          height: 8.48528137px
+          background: transparent
+          border-width: 4.24264069px
+          border-style: solid
+          bottom: -4px
+          border-top-color: transparent
+          border-right-color: #ff5263
+          border-bottom-color: #ff5263
+          border-left-color: transparent
+          transform: translateX(-50%) rotate(45deg)

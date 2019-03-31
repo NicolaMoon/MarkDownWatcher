@@ -54,7 +54,7 @@ app.get('/', function (req, res) {
   let comments = data ? data.comments : [];
   const { mtime, birthtime } = stats;
   fileInfo={ mtime: moment(mtime).format('YYYY-MM-DD HH:mm:ss'), birthtime: moment(birthtime).format('YYYY-MM-DD HH:mm:ss') };
-  res.render('list', {
+  res.render('home', {
     mdList,
     cssList: cssList, css: req.query.css || 'normal',
     mdFile: md.render(mdFile.toString()),

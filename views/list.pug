@@ -47,5 +47,13 @@ block content
           .comment-time= item.time
           - const COLOR = { error: '#ff5263', warning: '#fcbd01', info: '#796eff' }
           p(style={color: COLOR[item.type]})= item.comment
+          if item.replies
+            each reply, index in item.replies
+              .reply
+                .comment-author= reply.author
+                .comment-time= reply.time
+                p= reply.reply
         .comment-operate
+          textarea(placeholder='请输入…').textareaReply
+          span(class='linkBtn primary', onclick=`handleReplyComment(${index})`) 回复
           span(class='linkBtn error', onclick=`handleDeleteComment(${index})`) 删除

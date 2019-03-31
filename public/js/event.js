@@ -19,6 +19,11 @@ function getFetch(url, params) {
   console.log(url);
   return fetch(url, { method: 'GET' }).then(res => res.json());
 }
+// 获取当前时间并格式化
+function getTime() {
+  const currentTime = new Date();
+  return `${currentTime.getFullYear()}-${currentTime.getMonth()}-${currentTime.getDate()} ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
+}
 
 // 改变样式文件
 function handleChangeStyle() {
@@ -65,13 +70,11 @@ function handleShowComment() {
 // 提交评论
 function handleSubmitComment() {
   const commentWord = document.getElementsByTagName('textarea')[0].value;
-  const currentTime = new Date();
-  const time = `${currentTime.getFullYear()}-${currentTime.getMonth()}-${currentTime.getDate()} ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
   const type = document.getElementById('selectType').value;
   getFetch('/comment.submit', {
     file: querys.file || 'index',
     author: 'Nicola',
-    time,
+    time: getTime(),
     text: commentForText,
     type,
     comment: commentWord
@@ -88,4 +91,15 @@ function handleCancleComment() {
 function handleDeleteComment(index) {
   getFetch('/comment.delete', { index, file: querys.file || 'index' })
   .then(res => res.success ? window.location.reload() : null);
+}
+// 回复评论
+function handleReplyComment(index) {
+  const reply = document.getElementsByClassName('textareaReply')[index].value;
+  getFetch('/comment.reply', {
+    index,
+    file: querys.file || 'index',
+    reply,
+    author: 'Replyer',
+    time: getTime()
+  }).then(res => res.success ? window.location.reload() : null);
 }

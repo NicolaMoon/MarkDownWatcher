@@ -89,3 +89,16 @@ app.get('/comment.delete', function (req, res) {
   fs.writeFileSync('./data.json', JSON.stringify(data));
   res.json({success: true});
 });
+
+// 回复评论
+app.get('/comment.reply', function (req, res) {
+  let data = JSON.parse(fs.readFileSync('./data.json', 'utf-8'));
+  if (!data[req.query.file].comments[req.query.index].replies) data[req.query.file].comments[req.query.index].replies = [];
+  data[req.query.file].comments[req.query.index].replies.push({
+    author: req.query.author,
+    time: req.query.time,
+    reply: req.query.reply
+  });
+  fs.writeFileSync('./data.json', JSON.stringify(data));
+  res.json({success: true});
+});

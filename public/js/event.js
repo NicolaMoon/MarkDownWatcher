@@ -67,12 +67,13 @@ function handleSubmitComment() {
   const commentWord = document.getElementsByTagName('textarea')[0].value;
   const currentTime = new Date();
   const time = `${currentTime.getFullYear()}-${currentTime.getMonth()}-${currentTime.getDate()} ${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()}`;
+  const type = document.getElementById('selectType').value;
   getFetch('/comment.submit', {
     file: querys.file || 'index',
     author: 'Nicola',
     time,
     text: commentForText,
-    type: 'info',
+    type,
     comment: commentWord
   }).then(res => res.success ? window.location.reload() : null);
 }

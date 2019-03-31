@@ -32,6 +32,9 @@ block content
     div(class='comment' id='commenting')
       .comment-title 评论
       .comment-content
+        select#selectType
+          each item in ['info', 'error', 'warning']
+            option(value=item)= item
         textarea(placeholder='请输入…')
       .comment-operate
         span(class='linkBtn primary', onclick='handleSubmitComment()') 确定
@@ -42,7 +45,7 @@ block content
         .comment-content
           .comment-author= item.author
           .comment-time= item.time
-          - const COLOR = { error: '#ff5263', warnning: '#fcbd01', info: '#796eff' }
+          - const COLOR = { error: '#ff5263', warning: '#fcbd01', info: '#796eff' }
           p(style={color: COLOR[item.type]})= item.comment
         .comment-operate
           span(class='linkBtn error', onclick=`handleDeleteComment(${index})`) 删除

@@ -43,12 +43,15 @@ switch (process.platform) {
 }
 
 // api路由请求
+// 首页面
 app.get('/', function (req, res) {
   let mdList = fs.readdirSync('./mds').map(val => path.basename(val, '.md'));
   let cssList = fs.readdirSync('./stylus').map(val => path.basename(val, '.styl'));
   let mdFile = fs.readFileSync(`./mds/${req.query.file || 'index'}.md`);
   let fileInfo = null;
   let stats = fs.statSync(`./mds/${req.query.file || 'index'}.md`);
+  let data = JSON.parse(fs.readFileSync('./data.json', 'utf-8'))[req.query.file || 'index'];
+  let comments = data ? data.comments : [];
   const { mtime, birthtime } = stats;
   fileInfo={ mtime: moment(mtime).format('YYYY-MM-DD HH:mm:ss'), birthtime: moment(birthtime).format('YYYY-MM-DD HH:mm:ss') };
   res.render('list', {
@@ -57,13 +60,32 @@ app.get('/', function (req, res) {
     mdFile: md.render(mdFile.toString()),
     fileName: req.query.file || 'index',
     fileInfo,
+    comments,
   });
 });
 
+// css获取
 app.get('/css/:file', function (req, res) {
   let css = fs.readFileSync(`./stylus/${req.params.file || 'index'}.styl`,'utf-8');
   stylus.render(css, {filename:"normal.css"}, function(err,css){
     if(err) throw err;
     res.end(css);
   });
+});
+
+// 提交评论
+app.get('/comment.submit', function (req, res) {
+  let data = JSON.parse(fs.readFileSync('./data.json', 'utf-8'));
+  if (!data[req.query.file]) data[req.query.file] = { comments: [] };
+  data[req.query.file].comments.push(req.query);
+  fs.writeFileSync('./data.json', JSON.stringify(data));
+  res.json({success: true});
+});
+
+// 删除评论
+app.get('/comment.delete', function (req, res) {
+  let data = JSON.parse(fs.readFileSync('./data.json', 'utf-8'));
+  data[req.query.file].comments.splice(req.query.index, 1);
+  fs.writeFileSync('./data.json', JSON.stringify(data));
+  res.json({success: true});
 });

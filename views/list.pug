@@ -18,7 +18,7 @@ block content
   .content
     div.
       !{mdFile}
-    .tooltip
+    .tooltip(onclick='handleShowComment()')
       p 评论
       .arrow
   .description
@@ -29,7 +29,20 @@ block content
         p= fileInfo.birthtime
         p 最后一次修改时间
         p= fileInfo.mtime
-    .comment
+    div(class='comment' id='commenting')
       .comment-title 评论
       .comment-content
         textarea(placeholder='请输入…')
+      .comment-operate
+        span(class='linkBtn primary', onclick='handleSubmitComment()') 确定
+        span(class='linkBtn error', onclick='handleCancleComment()') 取消
+    each item, index in comments
+      .comment
+        .comment-title= item.text
+        .comment-content
+          .comment-author= item.author
+          .comment-time= item.time
+          - const COLOR = { error: '#ff5263', warnning: '#fcbd01', info: '#796eff' }
+          p(style={color: COLOR[item.type]})= item.comment
+        .comment-operate
+          span(class='linkBtn error', onclick=`handleDeleteComment(${index})`) 删除

@@ -7,6 +7,14 @@ li
   list-style-type: none
 a
   text-decoration: none
+.primary
+  color: #1890ff
+.error
+  color: #f5222d;
+.warnning
+  color: #faad14;
+.success
+  color: #52c41a;
 html
   font-family: 'Noto Serif SC', serif
   select
@@ -98,6 +106,8 @@ html
           padding 16px
           font-size 14px
           color #707070
+      #commenting
+        display: none
       .comment
         margin-bottom: 15px
         background-color: #fff
@@ -119,6 +129,7 @@ html
             height: 100%
             background: linear-gradient(to bottom, #796eff 0%, #ff5263 100%)
         .comment-content
+          position relative
           padding: 8px
           textarea
             width: 100%
@@ -127,6 +138,22 @@ html
             letter-spacing: 1px
             &:focus
               outline: none
+          .comment-author
+            margin-bottom: 4px
+            font-size: 12px
+            color: #707070
+          .comment-time
+            position: absolute
+            top: 8px
+            right: 8px
+            font-size: 12px
+            color: #707070
+        .comment-operate
+          padding: 0 8px 8px 0
+          text-align: right
+          .linkBtn
+            margin-left: 8px
+            cursor pointer
     .content
       position relative
       order: 2

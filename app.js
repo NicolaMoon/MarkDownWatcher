@@ -1,6 +1,7 @@
 const express = require("express");
 const http = require("http");
 const app = express();
+var bodyParser = require('body-parser');
 const fs = require('fs');
 const path = require('path');
 // 引用markdown动态解析模块
@@ -101,4 +102,25 @@ app.get('/comment.reply', function (req, res) {
   });
   fs.writeFileSync('./data.json', JSON.stringify(data));
   res.json({success: true});
+});
+
+// 编辑页面
+app.get('/edit', function (req, res) {
+  let cssList = fs.readdirSync('./stylus').map(val => path.basename(val, '.styl'));
+  let mdFile = fs.readFileSync(`./mds/${req.query.file}.md`);
+  res.render('edit', {
+    cssList: cssList,
+    css: req.query.css || 'normal',
+    md: mdFile,
+    html: md.render(mdFile.toString())
+  });
+});
+
+app.use(bodyParser.json());
+
+// 编辑操作
+app.post('/md.edit', function (req, res) {
+  fs.writeFileSync(`./mds/${req.body.file}.md`, req.body.text);
+  let mdFile = fs.readFileSync(`./mds/${req.body.file}.md`);
+  res.json({ success: true, text: md.render(mdFile.toString()) });
 });

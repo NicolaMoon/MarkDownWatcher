@@ -1,0 +1,15 @@
+extends ./layout.pug
+
+block head
+  head
+    title edit
+    link(rel="stylesheet", href=`../css/${css}`)
+    script(src='js/edit.js')
+block content
+  .editBox
+    .number
+      span 1
+    textarea.editInput.
+      !{md}
+  .content.
+    !{html}

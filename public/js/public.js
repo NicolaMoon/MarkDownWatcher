@@ -14,6 +14,16 @@ function getFetch(url, params) {
   console.log(url);
   return fetch(url, { method: 'GET' }).then(res => res.json());
 }
+
+function postFetch(url, params) {
+  return fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(params)
+  }).then(res => res.json());
+}
 // 获取当前时间并格式化
 function getTime() {
   const currentTime = new Date();
@@ -24,5 +34,10 @@ function getTime() {
 function handleChangeStyle() {
   let select = document.getElementById('selectCss');
   let cssValue = select.value;
-  window.location.href = `../?file=${querys.file || 'index'}&css=${cssValue}`;
+  let pathname = window.location.pathname;
+  let openURL = `${pathname}?css=${cssValue}`;
+  if (pathname === '/'){
+    openURL += `&file=${querys.file || 'index'}`;
+  }
+  window.location.href = openURL;
 }

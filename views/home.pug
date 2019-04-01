@@ -7,8 +7,8 @@ block head
     script(src='js/home.js')
 block content
   .side
-    .btn= '新建'
-    div(class='btn editBtn')= '编辑'
+    .btn 新建
+    div(class='btn editBtn', onclick=`window.location.href='/edit?file=${fileName}'`) 编辑
     p.title 文件列表
     nav
       each item, index in mdList

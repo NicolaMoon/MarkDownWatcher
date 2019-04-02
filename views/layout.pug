@@ -4,7 +4,7 @@ html
   script(src='js/public.js')
   body
     div.header
-      p.title Md Viewer
+      p(onclick="window.location.href='/'").title Md Viewer
       .floatRight
         span.label 切换样式:
         select(onchange=`handleChangeStyle()`)#selectCss

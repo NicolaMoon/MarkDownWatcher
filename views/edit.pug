@@ -7,9 +7,11 @@ block head
     script(src='js/edit.js')
 block content
   .editBox
-    .number
-      span 1
+    .numberBox
+      .number
+        span 1
+    input(value=fileName, onchange='handleEditName()').editName
     textarea.editInput.
       !{md}
-  .content.
+  .content(style='margin: 0;').
     !{html}

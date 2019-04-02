@@ -112,7 +112,8 @@ app.get('/edit', function (req, res) {
     cssList: cssList,
     css: req.query.css || 'normal',
     md: mdFile,
-    html: md.render(mdFile.toString())
+    html: md.render(mdFile.toString()),
+    fileName: req.query.file,
   });
 });
 
@@ -123,4 +124,12 @@ app.post('/md.edit', function (req, res) {
   fs.writeFileSync(`./mds/${req.body.file}.md`, req.body.text);
   let mdFile = fs.readFileSync(`./mds/${req.body.file}.md`);
   res.json({ success: true, text: md.render(mdFile.toString()) });
+});
+
+// 修改文件名
+app.post('/name.edit', function (req, res) {
+  fs.rename(`./mds/${req.body.file}.md`, `./mds/${req.body.name}.md`, (err) => {
+    if (err) res.json({ success: fasle });
+    res.json({ success: true });
+  });
 });

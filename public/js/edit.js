@@ -9,7 +9,7 @@ function keyUp() {
   postFetch('/md.edit', {
     file: querys.file,
     text: text,
-  }).then(res => { res.success ? content.innerHTML = res.text : alert('编辑出错');console.log(res)});
+  }).then(res => res.success ? content.innerHTML = res.text : alert('编辑出错'));
 }
 // 行号插入
 function setLinesNumber(count) {
@@ -30,3 +30,11 @@ window.onload = () => {
   let lines = text.match(/(\r\n)|(\n)/g) ? text.match(/(\r\n)|(\n)/g).length + 1 : 1;
   setLinesNumber(lines);
 };
+// 修改文件名
+function handleEditName() {
+  let newName = document.getElementsByClassName('editName')[0].value;
+  postFetch('/name.edit', {
+    file: querys.file,
+    name: newName,
+  }).then(res => res.success ? null : alert('修改出错'));
+}

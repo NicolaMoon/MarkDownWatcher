@@ -84,7 +84,7 @@ function handleSubmitComment() {
 function handleCancleComment() {
   const comment = document.getElementById('commenting');
   const tooltip = document.getElementsByClassName('tooltip')[0];
-  comment.style.cssText = 'display: none';
+  comment.style.cssText = 'display: none;';
   tooltip.style.cssText = 'display: none;';
 }
 // 删除评论
@@ -102,4 +102,19 @@ function handleReplyComment(index) {
     author: 'Replyer',
     time: getTime()
   }).then(res => res.success ? window.location.reload() : null);
+}
+// 点击新建按钮
+function handleShowModal() {
+  let modal = document.getElementsByClassName('modalBg')[0];
+  modal.style.cssText = 'display: flex;';
+}
+// 取消新建文件
+function handleCancelNew() {
+  let modal = document.getElementsByClassName('modalBg')[0];
+  modal.style.cssText = 'display: none;';
+}
+// 新建文件
+function handleNewFile() {
+  let name = document.getElementsByClassName('name-input')[0].value;
+  getFetch('/file.new', { name }).then(res => res.success ? window.location.href=`/edit?file=${name}` : alert('创建出错'));
 }

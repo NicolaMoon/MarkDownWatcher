@@ -7,7 +7,7 @@ block head
     script(src='js/home.js')
 block content
   .side
-    .btn 新建
+    .btn(onclick='handleShowModal()') 新建
     div(class='btn editBtn', onclick=`window.location.href='/edit?file=${fileName}'`) 编辑
     p.title 文件列表
     nav
@@ -58,3 +58,10 @@ block content
           textarea(placeholder='请输入…').textareaReply
           span(class='linkBtn primary', onclick=`handleReplyComment(${index})`) 回复
           span(class='linkBtn error', onclick=`handleDeleteComment(${index})`) 删除
+block modal
+  .modal-title 新建文件
+  .modal-content
+    input(placeholder='文件名…').name-input
+  .modal-footer
+    .btn.newBtn(onclick='handleNewFile()') 创建
+    .btn.cancelBtn(onclick='handleCancelNew()') 取消

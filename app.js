@@ -133,3 +133,11 @@ app.post('/name.edit', function (req, res) {
     res.json({ success: true });
   });
 });
+
+// 创建文件
+app.get('/file.new', function (req, res) {
+  fs.writeFile(`./mds/${req.query.name}.md`, '', (err) => {
+    if (err) res.json({ success: false });
+    res.json({ success: true });
+  });
+});

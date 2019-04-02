@@ -1,17 +1,16 @@
-// 获取URL的querys
+// 获取URL的参数
 function getQuerys() {
   let url = window.location.href;
-  let querys = {};
+  let querysObj = {};
   url.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
-    querys[key] = value;
+    querysObj[key] = value;
   });
-  return querys;
+  return querysObj;
 }
 let querys = getQuerys();
 // fetch封装
 function getFetch(url, params) {
   url += Object.entries(params).reduce((before, current) => `${before}&${current[0]}=${current[1]}`, '?');
-  console.log(url);
   return fetch(url, { method: 'GET' }).then(res => res.json());
 }
 

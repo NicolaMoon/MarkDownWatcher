@@ -7,8 +7,9 @@ block head
     script(src='js/home.js')
 block content
   .side
-    .btn(onclick='handleShowModal()') 新建
+    .btn(onclick='handleShowModal(0)') 新建
     div(class='btn editBtn', onclick=`window.location.href='/edit?file=${fileName}'`) 编辑
+    div(class='btn deleteBtn', onclick='handleShowModal(1)') 删除
     p.title 文件列表
     nav
       each item, index in mdList
@@ -64,4 +65,5 @@ block modal
     input(placeholder='文件名…').name-input
   .modal-footer
     .btn.newBtn(onclick='handleNewFile()') 创建
+    .btn.deleteBtn(onclick='handleDeleteFile()') 删除
     .btn.cancelBtn(onclick='handleCancelNew()') 取消

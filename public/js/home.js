@@ -104,11 +104,20 @@ function handleReplyComment(index) {
   }).then(res => res.success ? window.location.reload() : null);
 }
 // 点击新建按钮
-function handleShowModal() {
+function handleShowModal(operate = 0) {
   let modal = document.getElementsByClassName('modalBg')[0];
+  let newBtn = modal.getElementsByClassName('newBtn')[0];
+  let deleteBtn = modal.getElementsByClassName('deleteBtn')[0];
   modal.style.cssText = 'display: flex;';
+  if(operate) {
+    newBtn.style.cssText = 'display: none;';
+    deleteBtn.style.cssText = 'display: block;';
+  } else {
+    newBtn.style.cssText = 'display: block;';
+    deleteBtn.style.cssText = 'display: none;';
+  }
 }
-// 取消新建文件
+// 取消按钮
 function handleCancelNew() {
   let modal = document.getElementsByClassName('modalBg')[0];
   modal.style.cssText = 'display: none;';
@@ -116,5 +125,13 @@ function handleCancelNew() {
 // 新建文件
 function handleNewFile() {
   let name = document.getElementsByClassName('name-input')[0].value;
-  getFetch('/file.new', { name }).then(res => res.success ? window.location.href=`/edit?file=${name}` : alert('创建出错'));
+  getFetch('/file.new', { name })
+  .then(res => res.success ? window.location.href=`/edit?file=${name}` : alert('操作出错'));
+}
+
+// 删除文件
+function handleDeleteFile() {
+  let name = document.getElementsByClassName('name-input')[0].value;
+  getFetch('/file.delete', { name })
+  .then(res => res.success ? window.location.reload() : alert('操作出错'));
 }

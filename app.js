@@ -43,6 +43,8 @@ switch (process.platform) {
       exec(`open ${HOST+PORT}`);
 }
 
+app.use(bodyParser.json());
+
 // api路由请求
 // 首页面
 app.get('/', function (req, res) {
@@ -117,8 +119,6 @@ app.get('/edit', function (req, res) {
   });
 });
 
-app.use(bodyParser.json());
-
 // 编辑操作
 app.post('/md.edit', function (req, res) {
   fs.writeFileSync(`./mds/${req.body.file}.md`, req.body.text);
@@ -130,7 +130,7 @@ app.post('/md.edit', function (req, res) {
 app.post('/name.edit', function (req, res) {
   fs.rename(`./mds/${req.body.file}.md`, `./mds/${req.body.name}.md`, (err) => {
     if (err) res.json({ success: fasle });
-    res.json({ success: true });
+    else res.json({ success: true });
   });
 });
 
@@ -138,6 +138,14 @@ app.post('/name.edit', function (req, res) {
 app.get('/file.new', function (req, res) {
   fs.writeFile(`./mds/${req.query.name}.md`, '', (err) => {
     if (err) res.json({ success: false });
-    res.json({ success: true });
+    else res.json({ success: true });
+  });
+});
+
+// 删除文件
+app.get('/file.delete', function (req, res) {
+  fs.unlink(`./mds/${req.query.name}.md`, (err) => {
+    if (err) res.json({ success: false });
+    else res.json({ success: true });
   });
 });

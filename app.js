@@ -48,7 +48,7 @@ app.use(bodyParser.json());
 // api路由请求
 // 首页面
 app.get('/', function (req, res) {
-  let mdList = fs.readdirSync('./mds').map(val => path.basename(val, '.md'));
+  let mdList = fs.readdirSync('./mds').filter(val => path.extname(val) === '.md').map(val => path.basename(val, '.md'));
   let cssList = fs.readdirSync('./stylus').map(val => path.basename(val, '.styl'));
   let mdFile = fs.readFileSync(`./mds/${req.query.file || 'index'}.md`);
   let fileInfo = null;

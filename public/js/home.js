@@ -16,7 +16,6 @@ let querys = getQuerys();
 // fetch封装
 function getFetch(url, params) {
   url += Object.entries(params).reduce((before, current) => `${before}&${current[0]}=${current[1]}`, '?');
-  console.log(url);
   return fetch(url, { method: 'GET' }).then(res => res.json());
 }
 // 获取当前时间并格式化
